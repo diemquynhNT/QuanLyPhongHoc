@@ -4,8 +4,11 @@
  */
 package quanlyphonghoc;
 
-import LoginRegister.LoginUserJFrame;
+import Jframe.HomeJFrame;
+import Jframe.LoginUserJFrame;
 import javax.swing.JFrame;
+import javax.swing.JRootPane;
+import javax.swing.UIManager;
 
 /**
  *
@@ -17,9 +20,10 @@ public class QuanLyPhongHoc {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JFrame frame = new LoginUserJFrame();
+                JFrame frame = new HomeJFrame();
                 frame.setVisible(true);
                 frame.setLocationRelativeTo(null);
+               
             }
         });
     }
