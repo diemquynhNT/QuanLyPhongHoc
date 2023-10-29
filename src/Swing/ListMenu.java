@@ -12,6 +12,7 @@ import Model.MenuModel;
 import Swing.MenuItem;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.DefaultListCellRenderer;
@@ -66,7 +67,10 @@ import javax.swing.SwingUtilities;
                         if(menu.getName() =="Trang chủ")
                             jf=new HomeJFrame();
                         else if (menu.getName()=="Lịch học")
-                            jf= new Jframe.LoginUserJFrame();
+                            {
+                                jf= new Jframe.CalendarFrame();
+                                jf.setMaximumSize(new Dimension(100, 100));
+                            }
                         else if (menu.getName()=="Phòng học")
                             jf= new PhongHocJFrame();
                         else if (menu.getName()=="Logout")
