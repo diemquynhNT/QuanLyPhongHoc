@@ -136,7 +136,7 @@ public class MyDatabase {
        ArrayList<LichHoc> lichHocData = new ArrayList<>();
         try {
             Connection connection=myconnect();
-            String query = "SELECT * FROM lichhoc WHERE ngayDay = ? and trangThaiLich=1 ORDER BY Ca";
+            String query = "SELECT * FROM lichhoc WHERE ngayDay = ?  ORDER BY Ca";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setDate(1, new java.sql.Date(ngay.getTime()));
             ResultSet rs = statement.executeQuery();
@@ -191,12 +191,14 @@ public class MyDatabase {
         boolean check=false;
         try {
             Connection connection=myconnect();
-            String query = "SELECT * FROM lichhoc WHERE idUser=?,ngayDay=?,Ca=?,idPhongHoc=?,trangThaiLich=?";
+            String query = "SELECT * FROM lichhoc WHERE idUser=?"
+                    + "AND ngayDay=? AND Ca=? AND idPhongHoc=? AND trangThaiLich=?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, lh.getIdUser());
              statement.setDate(2, new java.sql.Date(lh.getNgay().getTime()));
-            statement.setString(3, lh.getIdPhong());
-            statement.setBoolean(4, lh.isTrangThai());
+             statement.setInt(3, lh.getSoTiet());
+            statement.setString(4, lh.getIdPhong());
+            statement.setBoolean(5, lh.isTrangThai());
             ResultSet rs = statement.executeQuery();
             if(!rs.next())
                 check=true;
@@ -236,7 +238,14 @@ public class MyDatabase {
      public static void UpdateLichHoc(LichHoc lh )
     {
         java.sql.Date sqlDate = new java.sql.Date(lh.getNgay().getTime());
-        String query = "UPDATE lichhoc SET monHoc=?,idUser=?,ngayDay=?,Ca=?,idPhongHoc=?,trangThaiLich=? WHERE idLichHoc=?";
+        String query = "UPDATE lichhoc "
+                + "SET monHoc=?,"
+                + "idUser=?,"
+                + "ngayDay=?,"
+                + "Ca=?,"
+                + "idPhongHoc=?,"
+                + "trangThaiLich=? "
+                + "WHERE idLichHoc=?";
         try {
             Connection con =myconnect();
             PreparedStatement pstmt = con.prepareStatement(query);
@@ -245,7 +254,7 @@ public class MyDatabase {
             pstmt.setDate(3, sqlDate);
             pstmt.setInt(4, lh.getSoTiet());
             pstmt.setString(5, lh.getIdPhong());
-            pstmt.setBoolean(6, true);
+            pstmt.setBoolean(6, lh.isTrangThai());
             pstmt.setString(7,lh.getIdLichHoc());
             pstmt.executeUpdate();
           
@@ -256,7 +265,7 @@ public class MyDatabase {
     }
       public static void DeleteLichHoc(String id )
     {
-        String query = "DELETE lichhoc WHERE monHoc=? AND trangThaiLich=false" ;
+        String query = "DELETE from lichhoc WHERE idLichHoc =? AND trangThaiLich=false" ;
         try {
             Connection con =myconnect();
             PreparedStatement pstmt = con.prepareStatement(query);

@@ -25,7 +25,9 @@ public class ActionButton extends JButton{
         addMouseListener(new MouseAdapter(){
             @Override
             public void mousePressed(MouseEvent e) {
+                
                 mousePress=true;
+                System.err.println(mousePress);
             }
 
             @Override
@@ -45,9 +47,9 @@ public class ActionButton extends JButton{
         int x = (width - size) / 2;
         int y = (height - size) / 2;
         if (mousePress) {
-            g2.setColor(new Color(158, 158, 158));
+            g2.setColor(Color.RED);
         } else {
-            g2.setColor(new Color(199, 199, 199));
+            g2.setColor(Color.BLUE);
         }
         g2.fill(new Ellipse2D.Double(x, y, size, size));
         g2.dispose();
