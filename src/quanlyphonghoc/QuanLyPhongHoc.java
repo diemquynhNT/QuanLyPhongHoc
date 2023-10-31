@@ -21,7 +21,7 @@ public class QuanLyPhongHoc {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JFrame frame = new LichHocJFrame();
+                JFrame frame = new LoginUserJFrame();
                 frame.setVisible(true);
                 frame.setLocationRelativeTo(null);
                

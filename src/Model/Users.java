@@ -17,6 +17,12 @@ public class Users {
     public Users(String string, String string1, int aInt, String string2, String string3, String string4, boolean aBoolean, String string5, String string6) {
     }
 
+    public Users(String idUser, String hoTen) {
+        this.idUser = idUser;
+        this.hoTen = hoTen;
+    }
+
+    
     public Users(String idUser, String hoTen, String email, String sdt, String gioiTinh, boolean trangThai, String userName, String passWord) {
         this.idUser = idUser;
         this.hoTen = hoTen;

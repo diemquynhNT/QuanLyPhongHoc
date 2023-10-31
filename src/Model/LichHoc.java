@@ -11,11 +11,11 @@ public class LichHoc {
     private String monHoc;
     private String idUser;
     private Date ngay;
-    private String soTiet;
+    private int soTiet;
     private String idPhong;
     private boolean trangThai;
     
-     public LichHoc(String idLichHoc, String monHoc, String idUser, Date ngay, String soTiet, String idPhong, boolean trangThai) {
+     public LichHoc(String idLichHoc, String monHoc, String idUser, Date ngay, int soTiet, String idPhong, boolean trangThai) {
         this.idLichHoc = idLichHoc;
         this.monHoc = monHoc;
         this.idUser = idUser;
@@ -60,11 +60,11 @@ public class LichHoc {
         this.ngay = ngay;
     }
 
-    public String getSoTiet() {
+    public int getSoTiet() {
         return soTiet;
     }
 
-    public void setSoTiet(String soTiet) {
+    public void setSoTiet(int soTiet) {
         this.soTiet = soTiet;
     }
 
