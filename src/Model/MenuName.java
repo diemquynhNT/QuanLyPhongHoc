@@ -7,7 +7,7 @@ package Model;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-public class MenuModel {
+public class MenuName {
 
     public String getName() {
         return name;
@@ -36,10 +36,10 @@ public class MenuModel {
     private String icon;
     private MenuType type;
 
-    public MenuModel() {
+    public MenuName() {
     }
 
-    public MenuModel(String name, String icon, MenuType type) {
+    public MenuName(String name, String icon, MenuType type) {
         this.name = name;
         this.icon = icon;
         this.type = type;

@@ -4,7 +4,7 @@
  */
 package Swing;
 
-import Model.MenuModel;
+import Model.MenuName;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -13,7 +13,6 @@ import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseMotionListener;
 import javax.swing.JFrame;
 
 /**
@@ -31,13 +30,13 @@ public class Menu extends javax.swing.JPanel {
     
     private void init()
     {
-    listMenu1.addItem(new MenuModel("Trang chủ","home",MenuModel.MenuType.MENU));
-      listMenu1.addItem(new MenuModel("Lịch học","home",MenuModel.MenuType.MENU));
-      listMenu1.addItem(new MenuModel("Phòng học","home",MenuModel.MenuType.MENU));
-      listMenu1.addItem(new MenuModel("Nhân viên","home",MenuModel.MenuType.MENU));
-      listMenu1.addItem(new MenuModel("Thông tin cá nhân","",MenuModel.MenuType.TITLE));
-      listMenu1.addItem(new MenuModel("Cá nhân","home",MenuModel.MenuType.MENU));
-      listMenu1.addItem(new MenuModel("Logout","home",MenuModel.MenuType.MENU));
+    listMenu1.addItem(new MenuName("Trang chủ","homepage",MenuName.MenuType.MENU));
+    listMenu1.addItem(new MenuName("Lịch học","calendar",MenuName.MenuType.MENU));
+    listMenu1.addItem(new MenuName("Phòng học","locker",MenuName.MenuType.MENU));
+    listMenu1.addItem(new MenuName("Nhân viên","management",MenuName.MenuType.MENU));
+    listMenu1.addItem(new MenuName("Thông tin cá nhân","",MenuName.MenuType.TITLE));
+    listMenu1.addItem(new MenuName("Cá nhân","user",MenuName.MenuType.MENU));
+    listMenu1.addItem(new MenuName("Logout","check-out",MenuName.MenuType.MENU));
     }
 
     @Override
@@ -49,9 +48,6 @@ public class Menu extends javax.swing.JPanel {
         g2.setPaint(gradientPaint);
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), 0, 0);
         g2.fillRect(0, 0, getWidth(), getHeight());
-        
-        
-        
         super.paintChildren(g); 
     }
     
@@ -67,14 +63,14 @@ public class Menu extends javax.swing.JPanel {
             }
         });
 
-        panelMoving.addMouseMotionListener(new MouseMotionAdapter() {
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                int newX = e.getXOnScreen() - x;
-                int newY = e.getYOnScreen() - y;
-                frame.setLocation(newX, newY);
-            }
-        });
+//        panelMoving.addMouseMotionListener(new MouseMotionAdapter() {
+//            @Override
+//            public void mouseDragged(MouseEvent e) {
+//                int newX = e.getXOnScreen() - x;
+//                int newY = e.getYOnScreen() - y;
+//                frame.setLocation(newX, newY);
+//            }
+//        });
     }
 
 
@@ -86,6 +82,7 @@ public class Menu extends javax.swing.JPanel {
 
         panelMoving = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         listMenu1 = new Swing.ListMenu<>();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -96,22 +93,31 @@ public class Menu extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/school (1).png"))); // NOI18N
-        jLabel1.setText(" app");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jLabel2.setText("MyProgram");
 
         javax.swing.GroupLayout panelMovingLayout = new javax.swing.GroupLayout(panelMoving);
         panelMoving.setLayout(panelMovingLayout);
         panelMovingLayout.setHorizontalGroup(
             panelMovingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMovingLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGap(16, 16, 16)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addContainerGap(129, Short.MAX_VALUE))
         );
         panelMovingLayout.setVerticalGroup(
             panelMovingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMovingLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(panelMovingLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         add(panelMoving, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -123,6 +129,7 @@ public class Menu extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private Swing.ListMenu<String> listMenu1;
     private javax.swing.JPanel panelMoving;
     // End of variables declaration//GEN-END:variables

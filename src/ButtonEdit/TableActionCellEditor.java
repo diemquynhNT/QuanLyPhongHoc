@@ -9,10 +9,7 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
 
-/**
- *
- * @author pengu73
- */
+//HANH DONG CLICK
 public class TableActionCellEditor extends DefaultCellEditor{
     
     private TableActionButton event;
@@ -25,6 +22,7 @@ public class TableActionCellEditor extends DefaultCellEditor{
     @Override
     public Component getTableCellEditorComponent(JTable jtable, Object o, boolean bln, int row, int column) {
         PanelButtonAction action = new PanelButtonAction();
+        //
         action.initEven(event, row);
         action.setBackground(jtable.getSelectionBackground());
         return action;

@@ -40,7 +40,7 @@ public class CalendarPanelCus extends javax.swing.JPanel {
         txNamThang.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         txNamThang.setForeground(new java.awt.Color(255, 255, 255));
         txNamThang.setText("THANG - NAM");
-        jLayeredPane1.add(txNamThang, new org.netbeans.lib.awtextra.AbsoluteConstraints(192, 0, -1, 40));
+        jLayeredPane1.add(txNamThang, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, -1, 40));
 
         btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/previous (1).png"))); // NOI18N
         btnBack.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -65,7 +65,17 @@ public class CalendarPanelCus extends javax.swing.JPanel {
         jLayeredPane1.add(btnNext, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 0, -1, 40));
 
         silde.setBackground(new java.awt.Color(255, 255, 255));
-        silde.setLayout(new java.awt.BorderLayout());
+
+        javax.swing.GroupLayout sildeLayout = new javax.swing.GroupLayout(silde);
+        silde.setLayout(sildeLayout);
+        sildeLayout.setHorizontalGroup(
+            sildeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        sildeLayout.setVerticalGroup(
+            sildeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 297, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -79,7 +89,7 @@ public class CalendarPanelCus extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jLayeredPane1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(silde, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE))
+                .addComponent(silde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

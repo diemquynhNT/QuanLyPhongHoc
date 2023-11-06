@@ -21,6 +21,7 @@ import javax.swing.SwingUtilities;
 public class PanelDate extends javax.swing.JLayeredPane {
 
     private int month,year;
+    
     public PanelDate(int month,int year) {
         initComponents();
         this.month=month;
@@ -159,15 +160,21 @@ public class PanelDate extends javax.swing.JLayeredPane {
 
         setLayout(new java.awt.GridLayout(7, 7));
 
-        mon.setText("T2");
+        mon.setForeground(new java.awt.Color(255, 0, 51));
+        mon.setText("CN");
         mon.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        mon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                monActionPerformed(evt);
+            }
+        });
         add(mon);
 
-        tue.setText("T3");
+        tue.setText("T2");
         tue.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         add(tue);
 
-        wed.setText("T4");
+        wed.setText("T3");
         wed.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         wed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,20 +183,20 @@ public class PanelDate extends javax.swing.JLayeredPane {
         });
         add(wed);
 
-        thur.setText("T5");
+        thur.setText("T4");
         thur.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         add(thur);
 
-        fri.setText("T6");
+        fri.setText("T5");
         fri.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         add(fri);
 
-        sat.setText("T7");
+        sat.setText("T6");
         sat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         add(sat);
 
-        sun.setForeground(new java.awt.Color(255, 51, 51));
-        sun.setText("CN");
+        sun.setForeground(new java.awt.Color(51, 51, 51));
+        sun.setText("T7");
         sun.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         add(sun);
         add(cell8);
@@ -239,6 +246,10 @@ public class PanelDate extends javax.swing.JLayeredPane {
     private void wedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wedActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_wedActionPerformed
+
+    private void monActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_monActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

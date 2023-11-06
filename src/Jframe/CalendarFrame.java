@@ -4,14 +4,10 @@
  */
 package Jframe;
 
-import CalendarForm.PanelDate;
 import CalendarForm.PanelSlide;
+import CalendarForm.PanelDate;
 import javax.swing.JFrame;
 
-/**
- *
- * @author pengu73
- */
 public class CalendarFrame extends javax.swing.JFrame {
     private int year,month;
     public CalendarFrame() {
@@ -26,13 +22,66 @@ public class CalendarFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        calendarPanelCus1 = new CalendarForm.CalendarPanelCus();
+        btnImport = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+        calendarPanelCus2 = new CalendarForm.CalendarPanelCus();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().add(calendarPanelCus1, java.awt.BorderLayout.CENTER);
+        setBackground(new java.awt.Color(102, 153, 255));
+
+        btnImport.setText("ImportData");
+        btnImport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImportActionPerformed(evt);
+            }
+        });
+
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(btnBack)
+                .addGap(18, 18, 18)
+                .addComponent(btnImport)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(calendarPanelCus2, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBack)
+                    .addComponent(btnImport))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(calendarPanelCus2, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportActionPerformed
+        JFrame jf= new Jframe.ImportExcelLichHocJFrame();
+        jf.setVisible(true);
+        jf.setLocationRelativeTo(null);
+
+    }//GEN-LAST:event_btnImportActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        JFrame jf= new Jframe.HomeJFrame();
+        jf.setVisible(true);
+        jf.setLocationRelativeTo(null);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnBackActionPerformed
 
     public static void main(String args[]) {
    
@@ -44,6 +93,8 @@ public class CalendarFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private CalendarForm.CalendarPanelCus calendarPanelCus1;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnImport;
+    private CalendarForm.CalendarPanelCus calendarPanelCus2;
     // End of variables declaration//GEN-END:variables
 }

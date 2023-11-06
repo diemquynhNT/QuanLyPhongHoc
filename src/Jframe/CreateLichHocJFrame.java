@@ -9,12 +9,6 @@ import CalendarForm.ToDay;
 import Model.LichHoc;
 import Model.PhongHoc;
 import Model.Users;
-import java.awt.Dimension;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -31,7 +25,7 @@ public class CreateLichHocJFrame extends javax.swing.JFrame {
 
     private Date ngayDay;
     String cellValue=null;
-    JComboBox<Users> comboGV=null;
+    JComboBox<String> comboGV=null;
     JComboBox<String> comboPhong=null;
     JComboBox<String> comboCa=null;
     public CreateLichHocJFrame(ToDay ngayChon) {
@@ -76,7 +70,7 @@ public class CreateLichHocJFrame extends javax.swing.JFrame {
                     String id = tabledata.getValueAt(row, 0).toString();
                     String monHoc = tabledata.getValueAt(row, 1).toString();
                     String phong = tabledata.getValueAt(row, 2).toString();
-                    int soTiet = Integer.parseInt(tabledata.getValueAt(row, 3).toString());
+                    Float soTiet = Float.parseFloat(tabledata.getValueAt(row, 3).toString());
                     String giaoVien = tabledata.getValueAt(row, 4).toString();
                     Boolean status = Boolean.parseBoolean(tabledata.getValueAt(row, 5).toString());
                     System.err.println(id+monHoc+soTiet+phong+status+ngayDay);
@@ -152,7 +146,7 @@ public class CreateLichHocJFrame extends javax.swing.JFrame {
                 model.addRow(new String[]{lichHoc.getIdLichHoc(),
                         lichHoc.getMonHoc(), 
                         lichHoc.getIdPhong(),
-                        Integer.toString(lichHoc.getSoTiet()),
+                        Float.toString(lichHoc.getSoTiet()),
                         lichHoc.getIdUser(),
                         Boolean.toString(lichHoc.isTrangThai())
                 
@@ -406,7 +400,7 @@ public class CreateLichHocJFrame extends javax.swing.JFrame {
         JFrame frame = new CalendarFrame();
                 frame.setVisible(true);
                 frame.setLocationRelativeTo(null);
-                this.setVisible(false);
+                 this.setVisible(false);
 
 
     }//GEN-LAST:event_btnBackActionPerformed
@@ -427,9 +421,9 @@ public class CreateLichHocJFrame extends javax.swing.JFrame {
 
         for(Users i : listgv)
         {
-           Users item = new Users(i.getIdUser(), i.getHoTen());
+          
             jComboBoxGV.addItem(i.getIdUser());
-            comboGV.addItem(item.getHoTen());
+            comboGV.addItem(i.getIdUser());
         }
        
     }

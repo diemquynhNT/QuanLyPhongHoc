@@ -25,7 +25,6 @@ public class ActionButton extends JButton{
         addMouseListener(new MouseAdapter(){
             @Override
             public void mousePressed(MouseEvent e) {
-                
                 mousePress=true;
                 System.err.println(mousePress);
             }

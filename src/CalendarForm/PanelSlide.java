@@ -40,7 +40,7 @@ public class PanelSlide extends javax.swing.JPanel {
     private Component comExit;
     private Component comShow;
     private AnimateType animateType;
-    private int animate = 10;
+    private int animate = 100;
 
     public void show(Component com, AnimateType animateType) {
         if (!timer.isRunning()) {

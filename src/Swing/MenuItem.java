@@ -4,7 +4,7 @@
  */
 package Swing;
 
-import Model.MenuModel;
+import Model.MenuName;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -14,19 +14,20 @@ import java.awt.RenderingHints;
 public class MenuItem extends javax.swing.JPanel {
 
     private boolean selected;
-    public MenuItem(MenuModel data) {
+    public MenuItem(MenuName data) {
         initComponents();
         setOpaque(false);
         
-        if(data.getType()==MenuModel.MenuType.MENU)
+        if(data.getType()==MenuName.MenuType.MENU)
         {
             lbIcon.setIcon(data.toIcon());
             jMenuName.setText(data.getName());
         }
-        else if(data.getType()==MenuModel.MenuType.TITLE)
+        else if(data.getType()==MenuName.MenuType.TITLE)
         {
             lbIcon.setText(data.getName());
-           // lbIcon.setFont(new Font("sansserif",1,12));
+            lbIcon.setFont(new Font("sansserif",1,13));
+            lbIcon.setForeground(Color.WHITE);
             jMenuName.setVisible(false);
             
         }
@@ -40,9 +41,6 @@ public class MenuItem extends javax.swing.JPanel {
         this.selected = selected;
         repaint();
     }
-    
-   
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -50,6 +48,7 @@ public class MenuItem extends javax.swing.JPanel {
         lbIcon = new javax.swing.JLabel();
         jMenuName = new javax.swing.JLabel();
 
+        jMenuName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuName.setForeground(new java.awt.Color(255, 255, 255));
         jMenuName.setText("Menu Name");
 
@@ -67,7 +66,7 @@ public class MenuItem extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lbIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jMenuName, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+            .addComponent(jMenuName, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

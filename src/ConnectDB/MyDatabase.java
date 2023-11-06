@@ -120,7 +120,7 @@ public class MyDatabase {
             pstmt.setString(2,lh.getMonHoc());
             pstmt.setString(3, lh.getIdUser());
             pstmt.setDate(4, sqlDate);
-            pstmt.setInt(5, lh.getSoTiet());
+            pstmt.setFloat(5, lh.getSoTiet());
             pstmt.setString(6, lh.getIdPhong());
             pstmt.setBoolean(7, true);
             pstmt.executeUpdate();
@@ -196,7 +196,7 @@ public class MyDatabase {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, lh.getIdUser());
              statement.setDate(2, new java.sql.Date(lh.getNgay().getTime()));
-             statement.setInt(3, lh.getSoTiet());
+             statement.setFloat(3, lh.getSoTiet());
             statement.setString(4, lh.getIdPhong());
             statement.setBoolean(5, lh.isTrangThai());
             ResultSet rs = statement.executeQuery();
@@ -252,7 +252,7 @@ public class MyDatabase {
             pstmt.setString(1,lh.getMonHoc());
             pstmt.setString(2, lh.getIdUser());
             pstmt.setDate(3, sqlDate);
-            pstmt.setInt(4, lh.getSoTiet());
+            pstmt.setFloat(4, lh.getSoTiet());
             pstmt.setString(5, lh.getIdPhong());
             pstmt.setBoolean(6, lh.isTrangThai());
             pstmt.setString(7,lh.getIdLichHoc());

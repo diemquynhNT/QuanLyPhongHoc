@@ -5,7 +5,7 @@
 package quanlyphonghoc;
 
 import Jframe.HomeJFrame;
-import Jframe.LichHocJFrame;
+import Jframe.ImportExcelLichHocJFrame;
 import Jframe.LoginUserJFrame;
 import javax.swing.JFrame;
 import javax.swing.JRootPane;

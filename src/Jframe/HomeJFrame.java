@@ -1,44 +1,40 @@
 
 package Jframe;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import Model.LichHoc;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
+
 public class HomeJFrame extends javax.swing.JFrame {
 
-    Connection con =null;
-    ResultSet rs=null;
-    PreparedStatement pst=null;
     public HomeJFrame() {
         initComponents();
-        con=ConnectDB.MyDatabase.myconnect();
         menu1.initMoving(HomeJFrame.this);
-        //FetchData();
+        FetchData();
       
         
     }
-//     private void FetchData() {
-//        try {
-//            int q;
-//            pst=con.prepareStatement("SELECT * FROM lichhoc");
-//            rs=pst.executeQuery();
-//            DefaultTableModel model=(DefaultTableModel)table.getModel();
-//            model.setRowCount(0);
-//            while(rs.next())
-//            {
-//                model.addRow(new String[]{rs.getString(1),rs.getString(2)
-//                        ,rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)});
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(HomeJFrame.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
+     private void FetchData() {
+         try {
+        ArrayList<LichHoc> listSP =ConnectDB.MyDatabase.ListLichHocByDate(new Date());
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+        for (LichHoc lichHoc : listSP) {
+            model.addRow(new String[]{lichHoc.getIdLichHoc(),
+                    lichHoc.getMonHoc(),
+                    lichHoc.getIdPhong(),
+                    String.valueOf(lichHoc.getSoTiet()),
+                    lichHoc.getIdUser(),
+                    String.valueOf(lichHoc.isTrangThai())
+            });
+        }
+    } catch (Exception ex) {
+        System.out.println(ex);
+    }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -46,8 +42,11 @@ public class HomeJFrame extends javax.swing.JFrame {
 
         mainPanel = new javax.swing.JPanel();
         menu1 = new Swing.Menu();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("HomePage\n");
 
         mainPanel.setBackground(new java.awt.Color(207, 232, 236));
 
@@ -57,22 +56,50 @@ public class HomeJFrame extends javax.swing.JFrame {
             }
         });
 
+        table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Id", "Khóa", "Phòng", "Ca", "GV", "Status"
+            }
+        ));
+        jScrollPane1.setViewportView(table);
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addComponent(menu1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(472, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
+                .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addComponent(menu1, javax.swing.GroupLayout.PREFERRED_SIZE, 422, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(menu1, javax.swing.GroupLayout.PREFERRED_SIZE, 451, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
 
-        getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(12, 12, 12))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -116,8 +143,10 @@ public class HomeJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainPanel;
     private Swing.Menu menu1;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 
    

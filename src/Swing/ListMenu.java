@@ -8,8 +8,7 @@ import Jframe.HomeJFrame;
 import Jframe.LoginUserJFrame;
 import Jframe.NhanVienJFrame;
 import Jframe.PhongHocJFrame;
-import Model.MenuModel;
-import Swing.MenuItem;
+import Model.MenuName;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -23,15 +22,14 @@ import javax.swing.ListCellRenderer;
 import javax.swing.SwingUtilities;
 
  public class ListMenu<E extends Object> extends JList<E>{
-     //JList hiển thị một danh sách các phần tử cho người dùng chọn hoặc xem
      //hien thi danh sach menu
     private final DefaultListModel model; // làm mô hình cho thành phần ListMenu
     private int selectedIndex =0;
     
     
     public ListMenu() {
-        model=new DefaultListModel(); // nhu List nhung tuong tac voi giao dien, JList 
-        setModel(model);
+        model=new DefaultListModel(); // lưu trữ dữ liệu cho danh sách ListMenu hiển thị
+        setModel(model);//gan model cho listmenu =>ListMenu se dung DefaultListModel de luu tru
         addMouseListener(new MouseAdapter(){
             @Override
             public void mousePressed(MouseEvent e) {
@@ -41,9 +39,9 @@ import javax.swing.SwingUtilities;
                     System.err.println(index);
                     Object o=model.getElementAt(index);// lay doi tuong tai vi tri index
                     System.err.println(o);
-                    if(o instanceof MenuModel){
-                        MenuModel menu=(MenuModel)o; //ep kieu
-                        if(menu.getType()== MenuModel.MenuType.MENU) {
+                    if(o instanceof MenuName){
+                        MenuName menu=(MenuName)o; //ep kieu
+                        if(menu.getType()== MenuName.MenuType.MENU) {
                                selectedIndex=index;
                             }
                     }else{
@@ -53,8 +51,6 @@ import javax.swing.SwingUtilities;
                 }
             }
             
-           
-
             @Override
             public void mouseClicked(MouseEvent e) {
                 if(SwingUtilities.isLeftMouseButton(e))
@@ -62,8 +58,8 @@ import javax.swing.SwingUtilities;
                     int index=locationToIndex(e.getPoint()); 
                     Object o=model.getElementAt(index);// lay doi tuong tai vi tri index
                     JFrame jf=new JFrame();
-                    if(o instanceof MenuModel){
-                        MenuModel menu=(MenuModel)o; 
+                    if(o instanceof MenuName){
+                        MenuName menu=(MenuName)o; 
                         if(menu.getName() =="Trang chủ")
                             jf=new HomeJFrame();
                         else if (menu.getName()=="Lịch học")
@@ -86,16 +82,9 @@ import javax.swing.SwingUtilities;
                  }
             }
             
-            
-            
-            
-            
         });
          
     }
-    
-    
-
     //hien thi danh sach menu
     @Override
     public ListCellRenderer<? super E> getCellRenderer() {
@@ -103,24 +92,21 @@ import javax.swing.SwingUtilities;
             @Override
             public Component getListCellRendererComponent(JList<?> list, 
                     Object o, int index, boolean selected, boolean focus) {
-                MenuModel data;
-                if(o instanceof MenuModel)
+                MenuName data;
+                if(o instanceof MenuName)
                 {
-                    data=(MenuModel)o;
+                    data=(MenuName)o;
                 }else{
-                    data=new MenuModel("",o+"",MenuModel.MenuType.EMPTY);
+                    data=new MenuName("",o+"",MenuName.MenuType.EMPTY);
                 }
                 MenuItem item=new MenuItem(data);
                 item.setSelected(selectedIndex==index);
                 return item;
-               
             }
-            
-        
         };
     }
     
-    public void addItem(MenuModel data){
+    public void addItem(MenuName data){
         model.addElement(data);
     
     }
