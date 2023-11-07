@@ -8,19 +8,19 @@ import java.util.Date;
 
 public class LichHoc {
     private String idLichHoc;
-    private String monHoc;
+    private String idKhoaHoc;
     private String idUser;
     private Date ngay;
-    private float soTiet;
+    private float ca;
     private String idPhong;
     private boolean trangThai;
-    
-     public LichHoc(String idLichHoc, String monHoc, String idUser, Date ngay, float soTiet, String idPhong, boolean trangThai) {
+
+    public LichHoc(String idLichHoc, String idKhoaHoc, String idUser, Date ngay, float ca, String idPhong, boolean trangThai) {
         this.idLichHoc = idLichHoc;
-        this.monHoc = monHoc;
+        this.idKhoaHoc = idKhoaHoc;
         this.idUser = idUser;
         this.ngay = ngay;
-        this.soTiet = soTiet;
+        this.ca = ca;
         this.idPhong = idPhong;
         this.trangThai = trangThai;
     }
@@ -36,12 +36,12 @@ public class LichHoc {
         this.idLichHoc = idLichHoc;
     }
 
-    public String getMonHoc() {
-        return monHoc;
+    public String getIdKhoaHoc() {
+        return idKhoaHoc;
     }
 
-    public void setMonHoc(String monHoc) {
-        this.monHoc = monHoc;
+    public void setIdKhoaHoc(String idKhoaHoc) {
+        this.idKhoaHoc = idKhoaHoc;
     }
 
     public String getIdUser() {
@@ -60,12 +60,12 @@ public class LichHoc {
         this.ngay = ngay;
     }
 
-    public float getSoTiet() {
-        return soTiet;
+    public float getCa() {
+        return ca;
     }
 
-    public void setSoTiet(float soTiet) {
-        this.soTiet = soTiet;
+    public void setCa(float ca) {
+        this.ca = ca;
     }
 
     public String getIdPhong() {
@@ -83,6 +83,8 @@ public class LichHoc {
     public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
     }
-     
+    
+    
+    
     
 }

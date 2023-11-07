@@ -158,14 +158,16 @@ public class MyDatabase {
         }
         return lichHocData;
     }
-    public static  ArrayList<String> GetListPhongHocTheoCa(int ca)
+    
+    public static  ArrayList<LichHoc> GetListPhongHocTheoCaNgay(float ca,Date ngay)
     {
-       ArrayList<String> list = new ArrayList<>();
+        ArrayList<LichHoc> list = new ArrayList<>();
         try {
             Connection connection=myconnect();
-            String query = "SELECT * FROM lichhoc WHERE Ca = ? and trangThaiLich=0 ORDER BY Ca";
+            String query = "SELECT * FROM lichhoc WHERE Ca = ? and ngayDay=?";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, ca);
+            statement.setFloat(1, ca);
+            statement.setDate(2, new java.sql.Date(ngay.getTime()));
             ResultSet rs = statement.executeQuery();
 
             
@@ -176,7 +178,7 @@ public class MyDatabase {
                         rs.getString("idUser"),
                         rs.getDate("ngayDay"),rs.getInt("Ca"),
                         rs.getString("idPhongHoc"),rs.getBoolean("trangThaiLich"));
-                list.add(lh.getIdPhong());
+                list.add(lh);
             
             }
         

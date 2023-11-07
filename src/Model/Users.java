@@ -4,6 +4,8 @@
  */
 package Model;
 
+import java.util.Date;
+
 public class Users {
     private String idUser;
     private String hoTen;
@@ -11,27 +13,24 @@ public class Users {
     private String sdt;
     private String gioiTinh;
     private boolean trangThai;
-    private String userName;
-    private String passWord;
+    private String idRole;
+    private Date ngaySinh;
+    private String diaChi;
+    private String chuyenNghanh;
+    private String trinhDo;
 
-    public Users(String string, String string1, int aInt, String string2, String string3, String string4, boolean aBoolean, String string5, String string6) {
-    }
-
-    public Users(String idUser, String hoTen) {
-        this.idUser = idUser;
-        this.hoTen = hoTen;
-    }
-
-    
-    public Users(String idUser, String hoTen, String email, String sdt, String gioiTinh, boolean trangThai, String userName, String passWord) {
+    public Users(String idUser, String hoTen, String email, String sdt, String gioiTinh, boolean trangThai, String idRole, Date ngaySinh, String diaChi, String chuyenNghanh, String trinhDo) {
         this.idUser = idUser;
         this.hoTen = hoTen;
         this.email = email;
         this.sdt = sdt;
         this.gioiTinh = gioiTinh;
         this.trangThai = trangThai;
-        this.userName = userName;
-        this.passWord = passWord;
+        this.idRole = idRole;
+        this.ngaySinh = ngaySinh;
+        this.diaChi = diaChi;
+        this.chuyenNghanh = chuyenNghanh;
+        this.trinhDo = trinhDo;
     }
 
     public String getIdUser() {
@@ -82,21 +81,49 @@ public class Users {
         this.trangThai = trangThai;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getIdRole() {
+        return idRole;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setIdRole(String idRole) {
+        this.idRole = idRole;
     }
 
-    public String getPassWord() {
-        return passWord;
+    public Date getNgaySinh() {
+        return ngaySinh;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    public void setNgaySinh(Date ngaySinh) {
+        this.ngaySinh = ngaySinh;
     }
+
+    public String getDiaChi() {
+        return diaChi;
+    }
+
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
+    }
+
+    public String getChuyenNghanh() {
+        return chuyenNghanh;
+    }
+
+    public void setChuyenNghanh(String chuyenNghanh) {
+        this.chuyenNghanh = chuyenNghanh;
+    }
+
+    public String getTrinhDo() {
+        return trinhDo;
+    }
+
+    public void setTrinhDo(String trinhDo) {
+        this.trinhDo = trinhDo;
+    }
+    
+    
+
+   
     
     
     
