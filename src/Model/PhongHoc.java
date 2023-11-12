@@ -8,20 +8,18 @@ public class PhongHoc {
     private String idPhongHoc;
     private int soTang;
     private int soGhe;
-    private boolean trangThaiHoatDong;
-    private boolean trangThaiPhong;
-    private int thietBi;
+    private boolean trangThaiSuDung;
+    private String thietBi;
 
-    public PhongHoc() {
-    }
-
-    public PhongHoc(String idPhongHoc, int soTang, int soGhe, boolean trangThaiHoatDong, boolean trangThaiPhong, int thietBi) {
+    public PhongHoc(String idPhongHoc, int soTang, int soGhe, boolean trangThaiSuDung, String thietBi) {
         this.idPhongHoc = idPhongHoc;
         this.soTang = soTang;
         this.soGhe = soGhe;
-        this.trangThaiHoatDong = trangThaiHoatDong;
-        this.trangThaiPhong = trangThaiPhong;
+        this.trangThaiSuDung = trangThaiSuDung;
         this.thietBi = thietBi;
+    }
+
+    public PhongHoc() {
     }
 
     public String getIdPhongHoc() {
@@ -48,29 +46,24 @@ public class PhongHoc {
         this.soGhe = soGhe;
     }
 
-    public boolean isTrangThaiHoatDong() {
-        return trangThaiHoatDong;
+    public boolean isTrangThaiSuDung() {
+        return trangThaiSuDung;
     }
 
-    public void setTrangThaiHoatDong(boolean trangThaiHoatDong) {
-        this.trangThaiHoatDong = trangThaiHoatDong;
+    public void setTrangThaiSuDung(boolean trangThaiSuDung) {
+        this.trangThaiSuDung = trangThaiSuDung;
     }
 
-    public boolean isTrangThaiPhong() {
-        return trangThaiPhong;
-    }
-
-    public void setTrangThaiPhong(boolean trangThaiPhong) {
-        this.trangThaiPhong = trangThaiPhong;
-    }
-
-    public int getThietBi() {
+    public String getThietBi() {
         return thietBi;
     }
 
-    public void setThietBi(int thietBi) {
+    public void setThietBi(String thietBi) {
         this.thietBi = thietBi;
     }
     
+    
+
+   
     
 }

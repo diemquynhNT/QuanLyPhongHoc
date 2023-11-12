@@ -35,34 +35,56 @@ public class CalendarPanelCus extends javax.swing.JPanel {
         setBackground(new java.awt.Color(0, 129, 167));
 
         jLayeredPane1.setBackground(new java.awt.Color(0, 129, 167));
-        jLayeredPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txNamThang.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         txNamThang.setForeground(new java.awt.Color(255, 255, 255));
         txNamThang.setText("THANG - NAM");
-        jLayeredPane1.add(txNamThang, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, -1, 40));
 
         btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/previous (1).png"))); // NOI18N
         btnBack.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnBack.setContentAreaFilled(false);
         btnBack.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnBack.setFocusable(false);
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
             }
         });
-        jLayeredPane1.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 0, -1, 40));
 
         btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/arrow-right.png"))); // NOI18N
         btnNext.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnNext.setContentAreaFilled(false);
         btnNext.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnNext.setFocusPainted(false);
         btnNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNextActionPerformed(evt);
             }
         });
-        jLayeredPane1.add(btnNext, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 0, -1, 40));
+
+        jLayeredPane1.setLayer(txNamThang, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(btnBack, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(btnNext, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
+        jLayeredPane1.setLayout(jLayeredPane1Layout);
+        jLayeredPane1Layout.setHorizontalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(btnBack)
+                .addGap(104, 104, 104)
+                .addComponent(txNamThang)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                .addComponent(btnNext)
+                .addGap(20, 20, 20))
+        );
+        jLayeredPane1Layout.setVerticalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(txNamThang, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         silde.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -88,7 +110,7 @@ public class CalendarPanelCus extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jLayeredPane1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(silde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents

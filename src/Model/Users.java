@@ -19,6 +19,10 @@ public class Users {
     private String chuyenNghanh;
     private String trinhDo;
 
+    public Users() {
+    }
+
+    
     public Users(String idUser, String hoTen, String email, String sdt, String gioiTinh, boolean trangThai, String idRole, Date ngaySinh, String diaChi, String chuyenNghanh, String trinhDo) {
         this.idUser = idUser;
         this.hoTen = hoTen;

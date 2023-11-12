@@ -4,29 +4,27 @@
  */
 package Jframe;
 
+import ConnectDB.LichHocDAO;
 import Model.LichHoc;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.System.Logger;
-import java.lang.System.Logger.Level;
-import javax.swing.JFrame;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import java.util.Date;
-import java.util.List;
+
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -53,6 +51,7 @@ public class ImportExcelLichHocJFrame extends javax.swing.JFrame {
         btnImport = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,22 +84,32 @@ public class ImportExcelLichHocJFrame extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 129, 167));
         jLabel2.setText("IMPORT DATA");
 
+        btnImport.setBackground(new java.awt.Color(0, 153, 153));
+        btnImport.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnImport.setForeground(new java.awt.Color(255, 255, 255));
         btnImport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/import_1.png"))); // NOI18N
         btnImport.setText("Import");
+        btnImport.setFocusPainted(false);
+        btnImport.setFocusable(false);
         btnImport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnImportActionPerformed(evt);
             }
         });
 
+        btnClear.setBackground(new java.awt.Color(0, 129, 167));
+        btnClear.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnClear.setForeground(new java.awt.Color(255, 255, 255));
         btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/delete.png"))); // NOI18N
-        btnClear.setText("Clear");
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClearActionPerformed(evt);
             }
         });
 
+        btnSave.setBackground(new java.awt.Color(0, 129, 167));
+        btnSave.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSave.setForeground(new java.awt.Color(255, 255, 255));
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/diskette.png"))); // NOI18N
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -109,26 +118,40 @@ public class ImportExcelLichHocJFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(255, 51, 51));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/back (1).png"))); // NOI18N
+        jButton2.setText("Back");
+        jButton2.setFocusable(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(241, 241, 241)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(224, 224, 224))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(btnImport, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSave)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(241, 241, 241)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(224, 224, 224))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnImport, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSave)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,13 +159,15 @@ public class ImportExcelLichHocJFrame extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnImport, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnImport, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)))
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -172,16 +197,14 @@ public class ImportExcelLichHocJFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 67, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportActionPerformed
-       ImportExcelModel= (DefaultTableModel)tableData.getModel();
+        ImportExcelModel= (DefaultTableModel)tableData.getModel();
         ImportExcelModel.setNumRows(0);
         FileInputStream excelFIP=null;
         BufferedInputStream excelBIS=null;
@@ -206,7 +229,7 @@ public class ImportExcelLichHocJFrame extends javax.swing.JFrame {
                 excelBIS=new BufferedInputStream(excelFIP);
                 excelImportWorkbook =new XSSFWorkbook(excelBIS);
                 XSSFSheet excelSheet=excelImportWorkbook.getSheetAt(0);
-                
+                System.err.println(excelSheet.getLastRowNum());
                 for(int i=1;i<=excelSheet.getLastRowNum();i++)
                 {
                     XSSFRow row=excelSheet.getRow(i);
@@ -217,8 +240,14 @@ public class ImportExcelLichHocJFrame extends javax.swing.JFrame {
                     XSSFCell cellStatus=row.getCell(5);
                     XSSFCell cellIdPhong=row.getCell(4);
                     XSSFCell cellCa=row.getCell(6);
-                    
-                    ImportExcelModel.addRow(new Object[] {cellId,cellMonHoc,cellIdUser,cellNgay,cellIdPhong,cellStatus,cellCa});
+                    if(cellNgay.getDateCellValue()!=null)
+                    {
+                    Date ngayTrongCell = cellNgay.getDateCellValue();
+                    System.err.println(ngayTrongCell);
+                    if (!ngayTrongCell.before(new Date())) {
+                        ImportExcelModel.addRow(new Object[] {cellId, cellMonHoc, cellIdUser, cellNgay, cellIdPhong, cellStatus, cellCa});
+                    }
+                    }
                 }
                 
                 JOptionPane.showMessageDialog(null, "import thanh cong");
@@ -250,8 +279,8 @@ public class ImportExcelLichHocJFrame extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
          int rowCount = ImportExcelModel.getRowCount();
+         System.err.println(rowCount);
         for (int i = 0; i < rowCount; i++) {
-            // Get the data from each column in the JTable row
             String cellId = ImportExcelModel.getValueAt(i, 0).toString();
             String cellMonHoc = ImportExcelModel.getValueAt(i, 1).toString();
             String cellIdUser = ImportExcelModel.getValueAt(i, 2).toString();
@@ -270,10 +299,9 @@ public class ImportExcelLichHocJFrame extends javax.swing.JFrame {
             boolean status = Boolean.parseBoolean(cellStatus);
             String cellCa = ImportExcelModel.getValueAt(i, 6).toString();
             float ca = Float.parseFloat(cellCa);
-            
-            
             LichHoc lh=new LichHoc(cellId,cellMonHoc,cellIdUser,cellNgay,ca,cellIdPhong,status);
-            ConnectDB.MyDatabase.AddLichHoc(lh);
+            LichHocDAO lich=new LichHocDAO();
+                lich.AddLichHoc(lh);
             
         
         }
@@ -283,6 +311,14 @@ public class ImportExcelLichHocJFrame extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       JFrame jf= new Jframe.CalendarFrame();
+        jf.setVisible(true);
+        jf.setLocationRelativeTo(null);
+        this.setVisible(false);
+        jf.setTitle("Lịch");
+    }//GEN-LAST:event_jButton2ActionPerformed
   
 
    
@@ -299,6 +335,7 @@ public class ImportExcelLichHocJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnImport;
     private javax.swing.JButton btnSave;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

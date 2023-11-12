@@ -51,10 +51,9 @@ public class PanelDate extends javax.swing.JLayeredPane {
         calendar.set(Calendar.MONTH, month-1);
         calendar.set(Calendar.DATE, 1);
         
-        int startDay = calendar.get(Calendar.DAY_OF_WEEK) - 1; 
-        //calendar.add =>thay doi ngay , neu startdate >0 => giam, <0 thi tang
-        //di chuyển lùi calendar để trỏ tới ngày đầu tiên của tuần trước ngày đầu tiên của tháng
-        calendar.add(Calendar.DATE, -startDay);
+        int startDay = calendar.get(Calendar.DAY_OF_WEEK) - 1; //=>thứ tự của ngày bắt đầu của tháng trong tuan
+        calendar.add(Calendar.DATE, -startDay);//=>trỏ tới ngày đầu tiên của tuần trước ngày đầu tiên của tháng
+        //=> hiển thị tuần trước ngày đầu tiên của tháng trên lịch
         ToDay today=getToDay();
         System.err.println("today"+today.getYear()+today.getMonth()+today.getDay());
         for(Component com:getComponents())// => getComponents trả về một mảng chứa tất cả các thành phần con của Panel đó.
@@ -78,9 +77,9 @@ public class PanelDate extends javax.swing.JLayeredPane {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         JFrame frame = new CreateLichHocJFrame(curDay);
-                        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                         frame.setLocationRelativeTo(null);
                         frame.setVisible(true);
+                        frame.setTitle("Quản lý lịch học");
 
                         
                     }

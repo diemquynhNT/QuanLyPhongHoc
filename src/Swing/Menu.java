@@ -24,7 +24,7 @@ public class Menu extends javax.swing.JPanel {
     public Menu() {
         initComponents();
         setOpaque(false);
-        listMenu1.setOpaque(false);
+        listMenu1.setOpaque(false);//set listMenu1 trong suot
         init();
     }
     
@@ -33,7 +33,7 @@ public class Menu extends javax.swing.JPanel {
     listMenu1.addItem(new MenuName("Trang chủ","homepage",MenuName.MenuType.MENU));
     listMenu1.addItem(new MenuName("Lịch học","calendar",MenuName.MenuType.MENU));
     listMenu1.addItem(new MenuName("Phòng học","locker",MenuName.MenuType.MENU));
-    //listMenu1.addItem(new MenuName("Khóa học","locker",MenuName.MenuType.MENU));
+    listMenu1.addItem(new MenuName("Khóa học","classroom",MenuName.MenuType.MENU));
     listMenu1.addItem(new MenuName("Nhân viên","management",MenuName.MenuType.MENU));
     listMenu1.addItem(new MenuName("Thông tin cá nhân","",MenuName.MenuType.TITLE));
     listMenu1.addItem(new MenuName("Cá nhân","user",MenuName.MenuType.MENU));
@@ -45,9 +45,12 @@ public class Menu extends javax.swing.JPanel {
         
         Graphics2D g2=(Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        //chuyen mau
         GradientPaint gradientPaint=new GradientPaint(0, 0, Color.decode("#0081A7"), 0, getHeight(), Color.decode("#00AFB9"));
         g2.setPaint(gradientPaint);
+        //bo goc
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), 0, 0);
+        //ve hinh vuong
         g2.fillRect(0, 0, getWidth(), getHeight());
         super.paintChildren(g); 
     }
@@ -96,7 +99,8 @@ public class Menu extends javax.swing.JPanel {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/school (1).png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jLabel2.setText("MyProgram");
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Apollo English ");
 
         javax.swing.GroupLayout panelMovingLayout = new javax.swing.GroupLayout(panelMoving);
         panelMoving.setLayout(panelMovingLayout);

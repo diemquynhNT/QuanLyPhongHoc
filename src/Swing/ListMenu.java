@@ -8,6 +8,7 @@ import Jframe.HomeJFrame;
 import Jframe.LoginUserJFrame;
 import Jframe.NhanVienJFrame;
 import Jframe.PhongHocJFrame;
+import Jframe.UserJFrame;
 import Model.MenuName;
 import java.awt.Component;
 import java.awt.Container;
@@ -23,16 +24,18 @@ import javax.swing.SwingUtilities;
 
  public class ListMenu<E extends Object> extends JList<E>{
      //hien thi danh sach menu
-    private final DefaultListModel model; // làm mô hình cho thành phần ListMenu
+    private final DefaultListModel model; // lưu trữ và quản lý dữ liệu cho các thành phần List => ListMenu
     private int selectedIndex =0;
     
     
     public ListMenu() {
         model=new DefaultListModel(); // lưu trữ dữ liệu cho danh sách ListMenu hiển thị
         setModel(model);//gan model cho listmenu =>ListMenu se dung DefaultListModel de luu tru
+        //vi tri
         addMouseListener(new MouseAdapter(){
             @Override
             public void mousePressed(MouseEvent e) {
+                //kiểm tra có phải nhấn là nút trái
                 if(SwingUtilities.isLeftMouseButton(e))
                 {
                     int index=locationToIndex(e.getPoint()); //lay vi tri hien tai khi click
@@ -47,7 +50,7 @@ import javax.swing.SwingUtilities;
                     }else{
                         selectedIndex=index;
                     }
-                    repaint();
+                    repaint();// lai khi thay doi
                 }
             }
             
@@ -61,18 +64,26 @@ import javax.swing.SwingUtilities;
                     if(o instanceof MenuName){
                         MenuName menu=(MenuName)o; 
                         if(menu.getName() =="Trang chủ")
+                        {
                             jf=new HomeJFrame();
+                            jf.setTitle("HomePage");
+                        }
                         else if (menu.getName()=="Lịch học")
-                            {
-                                jf= new Jframe.CalendarFrame();
-                                jf.setMaximumSize(new Dimension(100, 100));
-                            }
+                        {
+                            jf= new Jframe.CalendarFrame();
+//                                jf.setMaximumSize(new Dimension(100, 100));
+                            jf.setTitle("Calendar");
+                        }
                         else if (menu.getName()=="Phòng học")
+                        {
                             jf= new PhongHocJFrame();
+                            jf.setTitle("Quản lý phòng học");
+                        }
                         else if (menu.getName()=="Logout")
+                        {
                             jf=new LoginUserJFrame();
-                        else if (menu.getName()=="Nhân viên")
-                            jf=new NhanVienJFrame();
+                            jf.setTitle("Login");
+                        }
                         Container container = (Container) e.getSource();
                         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(container);
                         frame.setVisible(false);
@@ -85,7 +96,7 @@ import javax.swing.SwingUtilities;
         });
          
     }
-    //hien thi danh sach menu
+    //render ra ds menu
     @Override
     public ListCellRenderer<? super E> getCellRenderer() {
         return new DefaultListCellRenderer(){
@@ -100,7 +111,7 @@ import javax.swing.SwingUtilities;
                     data=new MenuName("",o+"",MenuName.MenuType.EMPTY);
                 }
                 MenuItem item=new MenuItem(data);
-                item.setSelected(selectedIndex==index);
+                item.setSelected(selectedIndex==index);//set trang thai
                 return item;
             }
         };

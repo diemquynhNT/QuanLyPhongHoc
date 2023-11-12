@@ -9,6 +9,9 @@ public class TaiKhoan {
     private String userName;
     private String password;
 
+    public TaiKhoan() {
+    }
+
     public TaiKhoan(String idUser, String userName, String password) {
         this.idUser = idUser;
         this.userName = userName;

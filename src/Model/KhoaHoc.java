@@ -7,15 +7,27 @@ package Model;
 public class KhoaHoc {
     private String idKhoaHoc;
     private String nameKhoaHoc;
+    private boolean trangThaiKH;
+
+    public KhoaHoc(String idKhoaHoc, String nameKhoaHoc, boolean trangThaiKH) {
+        this.idKhoaHoc = idKhoaHoc;
+        this.nameKhoaHoc = nameKhoaHoc;
+        this.trangThaiKH = trangThaiKH;
+    }
+
+    public boolean isTrangThaiKH() {
+        return trangThaiKH;
+    }
+
+    public void setTrangThaiKH(boolean trangThaiKH) {
+        this.trangThaiKH = trangThaiKH;
+    }
+    
 
     public KhoaHoc() {
     }
 
-    public KhoaHoc(String idKhoaHoc, String nameKhoaHoc) {
-        this.idKhoaHoc = idKhoaHoc;
-        this.nameKhoaHoc = nameKhoaHoc;
-    }
-
+    
     public String getIdKhoaHoc() {
         return idKhoaHoc;
     }

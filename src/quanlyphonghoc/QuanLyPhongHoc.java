@@ -24,6 +24,7 @@ public class QuanLyPhongHoc {
                 JFrame frame = new LoginUserJFrame();
                 frame.setVisible(true);
                 frame.setLocationRelativeTo(null);
+                frame.setTitle("Login");
                
             }
         });

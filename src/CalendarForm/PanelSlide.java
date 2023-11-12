@@ -8,7 +8,12 @@ import java.awt.event.ComponentEvent;
 import javax.swing.Timer;
 
 public class PanelSlide extends javax.swing.JPanel {
-
+    private final Timer timer; //hiệu ứng trượt qua lại
+    //Các thành phần ở giao diện được hiển thị và ẩn trong lúc trượt
+    private Component comExit;
+    private Component comShow;
+    private AnimateType animateType; //huong di chuyen
+    private int animate = 100;// toc do
     public int getAnimate() {
         return animate;
     }
@@ -36,11 +41,6 @@ public class PanelSlide extends javax.swing.JPanel {
 
     }
 
-    private final Timer timer;
-    private Component comExit;
-    private Component comShow;
-    private AnimateType animateType;
-    private int animate = 100;
 
     public void show(Component com, AnimateType animateType) {
         if (!timer.isRunning()) {
