@@ -81,4 +81,38 @@ public class Validation {
         return digits;
     
     }
+     
+   public ArrayList<String> validatePass(String pass,String repass)
+    {
+       if(pass.isEmpty())
+           err.add("Password can not be empty");
+       else if(pass.length()<8)
+           err.add("Password to short");
+       else if (pass.length()>50)
+           err.add("Password to long");
+       else if(!isStrongPassword(pass))
+           err.add("Enter strong pass");
+           
+       //Repass
+       if(repass.isEmpty())
+           err.add("Password can not be empty");
+       else if(repass.length()<8)
+           err.add("RePass to short");
+       else if (repass.length()>50)
+           err.add("Password to long");
+       else if(!repass.equals(pass))
+           err.add("Both pass are not matching");
+            
+       return err;
+    }
+    public ArrayList<String> validateUserName(String username)
+    {
+       if(username.isEmpty())
+           err.add("UserName không được trống !!!");
+       else if(!ConnectDB.TaiKhoanDAO.ValidateTaiKhoan(username))
+           err.add("UserName đã được sử dụng!!! ");
+       
+       
+       return err;
+    }
 }

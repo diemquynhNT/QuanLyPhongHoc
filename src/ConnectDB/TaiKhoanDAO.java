@@ -26,7 +26,7 @@ public class TaiKhoanDAO {
             e.printStackTrace();
         }
     }
-     public static  boolean ValidateTaiKhoan(String tk)
+     public static boolean ValidateTaiKhoan(String tk)
     {
         boolean check=false;
         try {

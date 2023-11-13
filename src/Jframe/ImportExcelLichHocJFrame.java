@@ -6,6 +6,7 @@ package Jframe;
 
 import ConnectDB.LichHocDAO;
 import Model.LichHoc;
+import Model.ValidationLichHoc;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,8 +17,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 import java.util.Date;
+import java.util.Random;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -224,28 +227,29 @@ public class ImportExcelLichHocJFrame extends javax.swing.JFrame {
         if(excelChoose==JFileChooser.APPROVE_OPTION)
         {
             try {
-                File excelFile=file.getSelectedFile();
-                excelFIP=new FileInputStream(excelFile);
-                excelBIS=new BufferedInputStream(excelFIP);
-                excelImportWorkbook =new XSSFWorkbook(excelBIS);
-                XSSFSheet excelSheet=excelImportWorkbook.getSheetAt(0);
+                File excelFile=file.getSelectedFile(); //lay file da chon
+                
+                excelFIP=new FileInputStream(excelFile);//FileInputStream để đọc dữ liệu từ file đã chọn
+                excelBIS=new BufferedInputStream(excelFIP);//đọc các dữ liệu từ FileInputStream 
+                excelImportWorkbook =new XSSFWorkbook(excelBIS); //tạo workbook (bảng tính) được nhập từ tệp Excel
+                XSSFSheet excelSheet=excelImportWorkbook.getSheetAt(0); // lay tai sheet
                 System.err.println(excelSheet.getLastRowNum());
                 for(int i=1;i<=excelSheet.getLastRowNum();i++)
                 {
                     XSSFRow row=excelSheet.getRow(i);
-                    XSSFCell cellId=row.getCell(0);
-                    XSSFCell cellMonHoc=row.getCell(1);
-                    XSSFCell cellIdUser=row.getCell(2);
-                    XSSFCell cellNgay=row.getCell(3);
-                    XSSFCell cellStatus=row.getCell(5);
+                    //XSSFCell cellId=row.getCell(0);
+                    XSSFCell cellMonHoc=row.getCell(0);
+                    XSSFCell cellIdUser=row.getCell(1);
+                    XSSFCell cellNgay=row.getCell(2);
+                    XSSFCell cellStatus=row.getCell(3);
                     XSSFCell cellIdPhong=row.getCell(4);
-                    XSSFCell cellCa=row.getCell(6);
+                    XSSFCell cellCa=row.getCell(5);
                     if(cellNgay.getDateCellValue()!=null)
                     {
                     Date ngayTrongCell = cellNgay.getDateCellValue();
                     System.err.println(ngayTrongCell);
                     if (!ngayTrongCell.before(new Date())) {
-                        ImportExcelModel.addRow(new Object[] {cellId, cellMonHoc, cellIdUser, cellNgay, cellIdPhong, cellStatus, cellCa});
+                        ImportExcelModel.addRow(new Object[] {cellMonHoc, cellIdUser, cellNgay, cellIdPhong, cellStatus, cellCa});
                     }
                     }
                 }
@@ -271,20 +275,26 @@ public class ImportExcelLichHocJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnImportActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+       ClearData();
+    }//GEN-LAST:event_btnClearActionPerformed
+    private void ClearData()
+    {
         int rowCount=ImportExcelModel.getRowCount();
         for (int i = rowCount-1; i>=0; i--) {
             ImportExcelModel.removeRow(i);
         }
-    }//GEN-LAST:event_btnClearActionPerformed
-
+    }
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
          int rowCount = ImportExcelModel.getRowCount();
          System.err.println(rowCount);
+        Random generator = new Random();
+        ValidationLichHoc v=new ValidationLichHoc();
+         ArrayList<String> lichLoi=new ArrayList<>();
         for (int i = 0; i < rowCount; i++) {
-            String cellId = ImportExcelModel.getValueAt(i, 0).toString();
-            String cellMonHoc = ImportExcelModel.getValueAt(i, 1).toString();
-            String cellIdUser = ImportExcelModel.getValueAt(i, 2).toString();
-            String dateString = ImportExcelModel.getValueAt(i, 3).toString();
+            //String cellId = ImportExcelModel.getValueAt(i, 0).toString();
+            String cellMonHoc = ImportExcelModel.getValueAt(i, 0).toString();
+            String cellIdUser = ImportExcelModel.getValueAt(i, 1).toString();
+            String dateString = ImportExcelModel.getValueAt(i, 2).toString();
             Date cellNgay = null;
             DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
 
@@ -294,19 +304,31 @@ public class ImportExcelLichHocJFrame extends javax.swing.JFrame {
                 e.printStackTrace();
             }   
                 
-            String cellIdPhong = ImportExcelModel.getValueAt(i, 4).toString();
-            String cellStatus =ImportExcelModel.getValueAt(i, 5).toString();
+            String cellIdPhong = ImportExcelModel.getValueAt(i, 3).toString();
+            String cellStatus =ImportExcelModel.getValueAt(i, 4).toString();
             boolean status = Boolean.parseBoolean(cellStatus);
-            String cellCa = ImportExcelModel.getValueAt(i, 6).toString();
+            String cellCa = ImportExcelModel.getValueAt(i, 5).toString();
             float ca = Float.parseFloat(cellCa);
-            LichHoc lh=new LichHoc(cellId,cellMonHoc,cellIdUser,cellNgay,ca,cellIdPhong,status);
-            LichHocDAO lich=new LichHocDAO();
-                lich.AddLichHoc(lh);
-            
-        
+            String id="L"+generator.nextInt(99) + 1+generator.nextInt(99) + 1;
+            LichHoc lh=new LichHoc(id,cellMonHoc,cellIdUser,cellNgay,ca,cellIdPhong,status);
+           
+            ArrayList<String> err=v.validationLichHoc(lh);
+           
+            if(err.size()<1)
+            {
+                    ConnectDB.LichHocDAO.AddLichHoc(lh);
+            }else{
+                String mess="Lịch: "+cellMonHoc+", ngày: "+dateString+
+                            ", phòng "+cellIdPhong+" đã bị hủy do trùng !!! ";
+                lichLoi.add(mess);
+
+            }
         }
         JOptionPane.showMessageDialog(null, "Data imported and saved to MySQL");
+        if(lichLoi.size()>0)
+            JOptionPane.showMessageDialog(null, lichLoi.toArray());
         
+        ClearData();
         
         
         

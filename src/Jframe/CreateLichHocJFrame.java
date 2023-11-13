@@ -80,20 +80,22 @@ public class CreateLichHocJFrame extends javax.swing.JFrame {
                     System.err.println(id+monHoc+soTiet+phong+status+ngayDay);
                     LichHoc lh=new LichHoc(id,monHoc,giaoVien,ngayDay,soTiet,phong,status);
                     System.err.println(monHoc+phong+soTiet+status);
-                    if(ConnectDB.LichHocDAO.ValidateLichHoc(lh))
+                    
+                    ValidationLichHoc v=new ValidationLichHoc();
+                    ArrayList<String> err=v.validationUpdateLichHoc(lh);
+                    if(err.size()<1)
                     {
                         try {
                             ConnectDB.LichHocDAO.UpdateLichHoc(lh);
                             JOptionPane.showMessageDialog(rootPane, "Cập nhật thành công !!!");
                             showData();
-
                         } catch (Exception e) {
                             e.printStackTrace();
-                            JOptionPane.showMessageDialog(rootPane, "Error: " + e.getMessage());
+                            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
                         }
                     }else
                     {
-                        JOptionPane.showMessageDialog(rootPane, "Trùng lịch học !!! ");
+                        JOptionPane.showMessageDialog(null, err.toArray());
                         showData();
                     }
                 }
@@ -189,7 +191,6 @@ public class CreateLichHocJFrame extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(0, 129, 167));
 
@@ -444,9 +445,9 @@ public class CreateLichHocJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxPhongActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-//        JFrame frame = new CalendarFrame();
-//                frame.setVisible(true);
-//                frame.setLocationRelativeTo(null);
+        JFrame frame = new CalendarFrame();
+                frame.setVisible(true);
+                frame.setLocationRelativeTo(null);
                  this.setVisible(false);
 
 

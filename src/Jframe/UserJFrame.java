@@ -523,7 +523,7 @@ public class UserJFrame extends javax.swing.JFrame {
         PreparedStatement ps;
         ResultSet rs;
             Random generator = new Random();
-            String id="u"+generator.nextInt(99) + 1;
+            String id="u"+generator.nextInt(99) + 1+generator.nextInt(99) + 1;
             Users u=getUsers();
             u.setIdUser(id);
             Validation v=new Validation();
@@ -586,6 +586,7 @@ public class UserJFrame extends javax.swing.JFrame {
             if(err.size()>0)
             {
                 JOptionPane.showMessageDialog(null, err.toArray());
+                err.clear();
             
             }else{
                 String query = "UPDATE users SET "
@@ -624,6 +625,7 @@ public class UserJFrame extends javax.swing.JFrame {
         if(tinhtrang==true)
         {
             JOptionPane.showMessageDialog(this,"Giaso viên còn lịch dạy !!");
+            
         }
         else{
             if(trangThai!="Đang làm")
@@ -654,21 +656,33 @@ public class UserJFrame extends javax.swing.JFrame {
         ArrayList<String> err=v.validateUsers(u);
         System.err.println(u.getIdUser());
         TaiKhoan tk=ConnectDB.TaiKhoanDAO.GetTaiKhoanById(u.getIdUser());
-        if(err.size()>0)
+        try {
+            if(err.size()==0)
             {
-                JOptionPane.showMessageDialog(null, err.toArray());
+                if(tk.getIdUser()==null)
+                {
+                    JFrame jf= new Jframe.TaoTaiKhoan(u.getIdUser(),u.getHoTen());
+                    jf.setVisible(true);
+                    jf.setLocationRelativeTo(null);
+                    jf.setTitle("Tạo tài khoản mới");
+                    //this.setVisible(false);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Đã có tài khoản !!!");
+                    JFrame jf= new Jframe.ThongTinTaiKhoanJFrame(u.getIdUser(),u.getHoTen());
+                    jf.setVisible(true);
+                    jf.setLocationRelativeTo(null);
+                    jf.setTitle("Thông tin tài khoản");
+
+                }
+            }else{
+            JOptionPane.showMessageDialog(null, err.toArray());
+            }
             
-        }else{
-            System.err.println(tk);
-            if(tk==null){
-            JFrame jf= new Jframe.TaoTaiKhoan(u.getIdUser(),u.getHoTen());
-            jf.setVisible(true);
-            jf.setLocationRelativeTo(null);
-            //this.setVisible(false);
-            }   else{
-            JOptionPane.showMessageDialog(null, "da co");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
         }
-        } 
+        
+        
         
     }//GEN-LAST:event_btnTaiKhoanActionPerformed
 

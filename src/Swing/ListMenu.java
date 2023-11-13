@@ -79,6 +79,11 @@ import javax.swing.SwingUtilities;
                             jf= new PhongHocJFrame();
                             jf.setTitle("Quản lý phòng học");
                         }
+                        else if (menu.getName()=="Nhân viên")
+                        {
+                            jf= new UserJFrame();
+                            jf.setTitle("Quản lý nhân viên");
+                        }
                         else if (menu.getName()=="Logout")
                         {
                             jf=new LoginUserJFrame();

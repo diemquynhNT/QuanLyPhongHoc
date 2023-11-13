@@ -455,6 +455,7 @@ public class PhongHocJFrame extends javax.swing.JFrame {
             ps.executeUpdate();
             JOptionPane.showMessageDialog(this, "Delete new row success");
             showDataTable();
+            getClear();
             }
             catch(Exception e)
             {

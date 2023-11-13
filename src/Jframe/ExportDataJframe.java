@@ -214,7 +214,7 @@ public class ExportDataJframe extends javax.swing.JFrame {
                         PreparedStatement pst = conn.prepareStatement(query);
                         ResultSet rs = pst.executeQuery();
                         
-                        // Tạo workbook và sheet cho tệp Excel
+                        // Tạo workbook và sheet 
                         XSSFWorkbook workbook = new XSSFWorkbook();
                         Sheet sheet = workbook.createSheet("LichHoc");
 
@@ -226,7 +226,6 @@ public class ExportDataJframe extends javax.swing.JFrame {
                         headerRow.createCell(4).setCellValue("Giáo viên");
                         headerRow.createCell(5).setCellValue("Phòng");
 
-                        // Thêm dữ liệu từ ResultSet vào tệp Excel
                         int rowNum = 1;
                         while (rs.next()) {
                             Row row = sheet.createRow(rowNum++);
@@ -235,7 +234,7 @@ public class ExportDataJframe extends javax.swing.JFrame {
                             row.createCell(1).setCellValue(rs.getString("idKhoaHoc"));
                             row.createCell(2).setCellValue(rs.getString("ngayDay"));
                             row.createCell(3).setCellValue(rs.getString("ca"));
-                            row.createCell(4).setCellValue(gv.getHoTen());
+                            row.createCell(4).setCellValue(gv.getHoTen()+"-"+rs.getString("idUser"));
                             row.createCell(5).setCellValue(rs.getString("idPhongHoc"));
                         }
                         File selectedFile = file.getSelectedFile(); // Lấy đường dẫn và tên tệp đã chọn

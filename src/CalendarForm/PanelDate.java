@@ -6,6 +6,7 @@ package CalendarForm;
 
 import Jframe.CreateLichHocJFrame;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -76,6 +77,9 @@ public class PanelDate extends javax.swing.JLayeredPane {
                 cell.addActionListener(new ActionListener(){
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        Container container = (Container) e.getSource();
+                        JFrame jf = (JFrame) SwingUtilities.getWindowAncestor(container);
+                        jf.setVisible(false);
                         JFrame frame = new CreateLichHocJFrame(curDay);
                         frame.setLocationRelativeTo(null);
                         frame.setVisible(true);
