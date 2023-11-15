@@ -6,6 +6,7 @@ package Jframe;
 import static ConnectDB.MyDatabase.myconnect;
 import Model.PhongHoc;
 import Model.Users;
+import java.awt.event.KeyEvent;
 import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -20,9 +21,14 @@ import javax.swing.table.TableRowSorter;
 public class PhongHocJFrame extends javax.swing.JFrame {
 
     Boolean trangThai;
+     ArrayList<String> err=new ArrayList<>();
     public PhongHocJFrame() {
         initComponents();
         showDataTable();
+        
+        
+        
+        
     }
     public void getClear()
     {
@@ -56,16 +62,28 @@ public class PhongHocJFrame extends javax.swing.JFrame {
             System.out.println(ex);
         }
     }
-    private ArrayList<String> CheckPhongHoc(PhongHoc ph )
+    private ArrayList<String> CheckPhongHoc(String id,String ghe,String thietBi,int soTang)
     {
-        ArrayList<String> err=new ArrayList<>();
-        PhongHoc phong=ConnectDB.PhongHocDAO.GetPhongHocById(ph.getIdPhongHoc());
-        if(ph.getIdPhongHoc().isEmpty())
+        int count=ConnectDB.PhongHocDAO.CountPhongTang(soTang);
+        if(id.isEmpty())
             err.add("Id trống!!!");
-        if(phong.getIdPhongHoc()!=null)
+        if(ghe.isEmpty())
+            err.add("Số ghế trống!!!");
+        else if(Integer.parseInt(ghe)<1 ||Integer.parseInt(ghe)>=30)
+            err.add("Số ghế chưa hợp lệ!!!");
+        if(thietBi.isEmpty())
+            err.add("Thiết bị trống!!!");
+        if(count>4)
+            err.add("Tầng đã hết phòng !!!");
+        
+        return err;
+    }
+    private ArrayList<String> CheckIdAdd(String id)
+    {
+       PhongHoc phong=ConnectDB.PhongHocDAO.GetPhongHocById(id);
+       if(phong.getIdPhongHoc()!=null)
             err.add("Mã phòng đã tồn tại!!!");
         return err;
-       
     }
 
     @SuppressWarnings("unchecked")
@@ -175,8 +193,24 @@ public class PhongHocJFrame extends javax.swing.JFrame {
         });
 
         jSoGhe.setText("0");
+        jSoGhe.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jSoGheKeyTyped(evt);
+            }
+        });
 
         jSoTang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
+
+        jThietBi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jThietBiActionPerformed(evt);
+            }
+        });
+        jThietBi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jThietBiKeyTyped(evt);
+            }
+        });
 
         jtrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang sử dụng", "Ngưng sử dụng" }));
 
@@ -192,7 +226,7 @@ public class PhongHocJFrame extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                true, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -411,16 +445,22 @@ public class PhongHocJFrame extends javax.swing.JFrame {
         Connection con =ConnectDB.MyDatabase.myconnect();
         PreparedStatement ps;
         ResultSet rs;
-        String id = jID.getText();
+        jID.setEditable(false);
         int Sotang = Integer.parseInt(jSoTang.getSelectedItem().toString());
-        int Soghe = Integer.parseInt(jSoGhe.getText());
         String trangthaiSuDung = jtrangThai.getSelectedItem().toString();
         if(trangthaiSuDung=="Đang sử dụng")
             trangThai=true;
         else trangThai=false;
-        String Thietbi = jThietBi.getText();
+        String id = jID.getText();
+        String ghe =jSoGhe.getText();
+      
+        String thietBi = jThietBi.getText();
         
-        String query = "UPDATE phonghoc "
+        ArrayList<String> err=CheckPhongHoc(id,ghe,thietBi,Sotang);
+        if(err.size()<1)
+        {
+            int Soghe = Integer.parseInt(jSoGhe.getText());
+             String query = "UPDATE phonghoc "
                + "SET soTang = ?, "
                + "soGhe = ?, "
                + "trangThaiSuDung = ?, "
@@ -430,7 +470,7 @@ public class PhongHocJFrame extends javax.swing.JFrame {
                     ps.setInt(1,Sotang);
                     ps.setInt(2, Soghe);
                     ps.setBoolean(3, trangThai);
-                    ps.setString(4, Thietbi);
+                    ps.setString(4, thietBi);
                     ps.setString(5,id);
                     ps.executeUpdate();
                     JOptionPane.showMessageDialog(this,"Cập nhật thành công");
@@ -438,6 +478,12 @@ public class PhongHocJFrame extends javax.swing.JFrame {
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this,"Error" + e);
                 }
+        }
+        else{
+         JOptionPane.showMessageDialog(this,err.toArray());
+         err.clear();
+        }
+       
     }//GEN-LAST:event_SuaActionPerformed
 
     private void XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XoaActionPerformed
@@ -474,19 +520,21 @@ public class PhongHocJFrame extends javax.swing.JFrame {
         PreparedStatement ps;
         ResultSet rs;
         
-        String id = jID.getText();
         int Sotang = Integer.parseInt(jSoTang.getSelectedItem().toString());
-        int Soghe = Integer.parseInt(jSoGhe.getText());
         String trangthaiSuDung = jtrangThai.getSelectedItem().toString();
         if(trangthaiSuDung=="Đang sử dụng")
             trangThai=true;
         else trangThai=false;
-        String Thietbi = jThietBi.getText();
-        PhongHoc ph=new PhongHoc(id, Sotang, Soghe, true, Thietbi);
-        ArrayList<String> err=CheckPhongHoc(ph);
         
+        String id = jID.getText();
+        String ghe =jSoGhe.getText();
+        String thietBi = jThietBi.getText();
+        ArrayList<String> err=CheckPhongHoc(id,ghe,thietBi,Sotang);
+        err=CheckIdAdd(id);
         if(err.size()<1)
         {
+            int Soghe = Integer.parseInt(jSoGhe.getText());
+            PhongHoc ph=new PhongHoc(id, Sotang, Soghe, true, thietBi);
             String query = "INSERT INTO phonghoc(idPhongHoc,soTang,soGhe,trangThaiSuDung,thietBi)"
                 + "values(?,?,?,?,?)";
             try{
@@ -495,7 +543,7 @@ public class PhongHocJFrame extends javax.swing.JFrame {
                 ps.setInt(2,Sotang);
                 ps.setInt(3,Soghe);
                 ps.setBoolean(4, trangThai);
-                ps.setString(5,Thietbi);
+                ps.setString(5,thietBi);
 
                 ps.executeUpdate();
                 JOptionPane.showMessageDialog(this,"Thêm thành công");
@@ -507,7 +555,8 @@ public class PhongHocJFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this,"Error"+e);
             }
         }else{
-            JOptionPane.showMessageDialog(this,err);
+            JOptionPane.showMessageDialog(this,err.toArray());
+            err.clear();
         }
         
     }//GEN-LAST:event_ThemActionPerformed
@@ -562,6 +611,21 @@ public class PhongHocJFrame extends javax.swing.JFrame {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         SearchData();
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void jThietBiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jThietBiActionPerformed
+    
+    }//GEN-LAST:event_jThietBiActionPerformed
+
+    private void jThietBiKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jThietBiKeyTyped
+        
+    }//GEN-LAST:event_jThietBiKeyTyped
+
+    private void jSoGheKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSoGheKeyTyped
+    char c = evt.getKeyChar();
+    if (!(Character.isDigit(c) || evt.isControlDown() || evt.isActionKey() || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE)) {
+        getToolkit().beep();
+        evt.consume();
+    }    }//GEN-LAST:event_jSoGheKeyTyped
     private void SearchData()
     {
         String searchText = jSreach.getText();

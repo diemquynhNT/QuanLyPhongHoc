@@ -62,7 +62,7 @@ public class LichHocDAO{
          ArrayList<PhongHoc> list=new ArrayList<>();
         try {
             Connection con=MyDatabase.myconnect();
-            String query = "SELECT * FROM phonghoc";
+            String query = "SELECT * FROM phonghoc where trangThaiSuDung=1";
             PreparedStatement pst = con.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {

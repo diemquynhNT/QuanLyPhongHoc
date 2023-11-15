@@ -55,7 +55,7 @@ public class CreateLichHocJFrame extends javax.swing.JFrame {
     {
         String[] options = {"true", "false"};
         String[] ca = {"1", "2","3","4"};
-        String[] mon = {"TOIEC", "IELTS"};
+        String[] mon = {"TOIEC"};
         JComboBox<String> comboBox = new JComboBox<>(options);
         comboCa=new JComboBox<>(ca);
         tabledata.getColumnModel().getColumn(5).setCellEditor(new DefaultCellEditor(comboBox));

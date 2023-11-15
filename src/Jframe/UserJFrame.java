@@ -526,9 +526,11 @@ public class UserJFrame extends javax.swing.JFrame {
             String id="u"+generator.nextInt(99) + 1+generator.nextInt(99) + 1;
             Users u=getUsers();
             u.setIdUser(id);
+            //check
             Validation v=new Validation();
-            ArrayList<String> err=v.validateUsers(u);
+            ArrayList<String> err=v.validateUsers(u);//
             err=v.CheckData(u);
+            
             if(err.size()>0)
             {
                 JOptionPane.showMessageDialog(null, err.toArray());
@@ -551,6 +553,7 @@ public class UserJFrame extends javax.swing.JFrame {
                     ps.setString(10, u.getTrinhDo());
                     ps.setDate(11, ngaySinh);
                     ps.executeUpdate();
+                    
                     JOptionPane.showMessageDialog(this,"Insert new row success");
                     showDataTable();
                     getClear();

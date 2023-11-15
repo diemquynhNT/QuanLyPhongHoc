@@ -14,8 +14,13 @@
             <file>file:/D:/java/QuanLyPhongHoc/src/ButtonEdit/PanelButtonAction.java</file>
             <file>file:/D:/java/QuanLyPhongHoc/src/Model/Validation.java</file>
             <file>file:/D:/java/QuanLyPhongHoc/src/quanlyphonghoc/QuanLyPhongHoc.java</file>
+            <file>file:/D:/java/QuanLyPhongHoc/src/Jframe/ChooseLichToPhong.java</file>
             <file>file:/D:/java/QuanLyPhongHoc/src/CalendarForm/PanelDate.java</file>
             <file>file:/D:/java/QuanLyPhongHoc/src/Model/KhoaHoc.java</file>
+            <file>file:/D:/java/QuanLyPhongHoc/src/Model/PhongHoc.java</file>
+            <file>file:/D:/java/QuanLyPhongHoc/src/ConnectDB/MyDatabase.java</file>
+            <file>file:/D:/java/QuanLyPhongHoc/src/Jframe/ChoosePhong.java</file>
+            <file>file:/D:/java/QuanLyPhongHoc/src/ConnectDB/PhongHocDAO.java</file>
             <file>file:/D:/java/QuanLyPhongHoc/src/Swing/ListMenu.java</file>
             <file>file:/D:/java/QuanLyPhongHoc/src/Jframe/CreateLichHocJFrame.java</file>
             <file>file:/D:/java/QuanLyPhongHoc/src/CalendarForm/PanelSlide.java</file>
@@ -23,6 +28,7 @@
             <file>file:/D:/java/QuanLyPhongHoc/src/ButtonEdit/ActionButton.java</file>
             <file>file:/D:/java/QuanLyPhongHoc/src/Jframe/ImportExcelLichHocJFrame.java</file>
             <file>file:/D:/java/QuanLyPhongHoc/src/Jframe/CalendarFrame.java</file>
+            <file>file:/D:/java/QuanLyPhongHoc/src/Model/DisplayItem.java</file>
             <file>file:/D:/java/QuanLyPhongHoc/src/Jframe/ExportDataJframe.java</file>
             <file>file:/D:/java/QuanLyPhongHoc/src/CalendarForm/ToDay.java</file>
             <file>file:/D:/java/QuanLyPhongHoc/src/ConnectDB/LichHocDAO.java</file>

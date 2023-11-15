@@ -4,7 +4,12 @@
  */
 package Model;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.regex.Matcher;
 
 public class Validation {
@@ -34,10 +39,26 @@ public class Validation {
            err.add("Trình độ không được trống !!!");
        if(user.getNgaySinh()==null)
            err.add("Ngày sinh không được trống !!!");
+       else if(TinhTuoi(user.getNgaySinh())<18)
+           err.add("Tuổi chưa đủ 18t !!!");
+        else if(TinhTuoi(user.getNgaySinh())>=60)
+           err.add("Qúa tuổi lao động !!!");
        
        return err;
     }
     
+    public int TinhTuoi(Date ngaySinh)
+    {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(ngaySinh);
+        LocalDate dob = LocalDate.of(cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH) + 1,
+                cal.get(Calendar.DAY_OF_MONTH));
+        LocalDate currentDate = LocalDate.now();
+        Period period = Period.between(dob, currentDate);
+        int age = period.getYears();
+        return age;
+                }
     public boolean  isValidEmail(String email)
     {
         String regexPattern = "[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
